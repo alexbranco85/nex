@@ -2,7 +2,7 @@ import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-export const authOptions = {
+const authOptions = {
   providers: [
     CredentialsProvider({
       name: 'credentials',
@@ -61,11 +61,11 @@ export const authOptions = {
     },
   },
   session: {
-    maxAge: 1 * 20,
+    maxAge: 5 * 60,
   }
 };
 
 // Função de handler para NextAuth
-const handler = (req: NextApiRequest, res: NextApiResponse) => NextAuth(req, res, authOptions);
+const handler = (req: any, res: NextApiResponse) => NextAuth(req, res, authOptions);
 
 export { handler as GET, handler as POST };
