@@ -8,7 +8,7 @@ class UserController {
       const user = await UserModel.getUserByEmail(email);
       if (user && UserModel.comparePassword(password, user.password)) {
         const token = jwt.sign({ id: user.id_user, email: user.email }, process.env.SECRET, { expiresIn: '1h' });
-        res.status(200).json({ token });
+        res.status(200).json({ user: { name: user.name, email: user.email, cpf: user.cpf, is_admin: user.is_admin, token: token } });
       } else {
         res.status(401).json({ error: 'E-mail ou senha inválida' });
       }
@@ -26,7 +26,7 @@ class UserController {
         res.status(409).json({ error: 'Email ou CPF já estão cadastrados.' });
       } else {
         const [newUser] = await UserModel.createUser({ name, cpf, email, password });
-        res.status(201).json(newUser);
+        res.status(201).json({ user: newUser, success: true });
       }
     } catch (error) {
       res.status(500).json({ error });

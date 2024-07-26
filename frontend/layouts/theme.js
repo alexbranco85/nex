@@ -11,7 +11,7 @@ const titillium = Titillium_Web({
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#0052cc',
+      main: '#a563ff',
     },
     secondary: {
       main: '#edf2ff',
@@ -96,6 +96,39 @@ const theme = createTheme({
         },
       },
     },
+    
+    MuiSelect: {
+      styleOverrides: {
+        select: {
+          color: '#fff', // Cor do texto no Select
+          '& .MuiSelect-icon': {
+            color: '#fff', // Cor do ícone
+          },
+        },
+      },
+    },
+    MuiMenu: {
+      styleOverrides: {
+        paper: {
+          backgroundColor: '#333', // Cor de fundo do menu suspenso
+          color: '#fff', // Cor do texto no menu suspenso
+        },
+      },
+    },
+    MuiMenuItem: {
+      styleOverrides: {
+        root: {
+          backgroundColor: '#333', // Cor de fundo dos itens do menu
+          color: '#fff', // Cor do texto dos itens do menu
+          '&:hover': {
+            backgroundColor: '#555', // Cor de fundo ao passar o mouse
+          },
+        },
+      },
+    },
+
+
+
   },
 });
 
