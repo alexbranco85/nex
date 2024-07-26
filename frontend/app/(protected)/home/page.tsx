@@ -9,7 +9,7 @@ export default function SignIn() {
     <Container
       component="main"
     >
-      <Grid container spacing={4} sx={{ p: 4 }}>
+      <Grid container spacing={4} sx={{ p: {xs: 0, sm: 4}, mt: 1 }}>
         <Grid item xs={12}>
           <ActionBar />
           <ViewTransactions />

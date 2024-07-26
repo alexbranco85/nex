@@ -20,7 +20,7 @@ type FormValues = {
 let schema = yup.object({
   firstName: yup.string().required(),
   lastName: yup.string().required(),
-  email: yup.string().required(),
+  email: yup.string().email().required(),
   cpf: yup.string().required(),
   password: yup.string().required()
 });
@@ -71,7 +71,7 @@ export default function FormSignUp() {
         },
         body: JSON.stringify({
           ...data,
-          name: data.firstName + data.lastName
+          name: data.firstName + ' ' + data.lastName
         })
       });
       const responseJson = await response.json();
@@ -152,6 +152,7 @@ export default function FormSignUp() {
                 name="email"
                 control={control}
                 error={errors}
+                type={"email"}
               />
             </Grid>
             <Grid item xs={12}>

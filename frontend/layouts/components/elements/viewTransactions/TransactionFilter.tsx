@@ -89,7 +89,7 @@ const TransactionFilter: React.FC<TransactionFilterProps> = ({ getTransactions }
   return (
     <Box
       sx={{
-        p: 4,
+        p: { xs: 2, sm: 4 },
         border: '1px solid #dedede',
         borderRadius: 4,
         mt: 2
