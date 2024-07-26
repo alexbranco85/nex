@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@mui/material";
 import theme from '../layouts/theme';
+import NextAuthSessionProvider from "./providers/NextAuthSessionProvider";
 
 export const metadata: Metadata = {
   title: "Sistema de Pontos",
@@ -14,10 +15,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ThemeProvider theme={theme}>
-      <html lang="pt_BR">
-        <body>{children}</body>
-      </html>
-    </ThemeProvider>
+    <NextAuthSessionProvider>
+      <ThemeProvider theme={theme}>
+        <html lang="pt_BR">
+          <body>{children}</body>
+        </html>
+      </ThemeProvider>
+    </NextAuthSessionProvider>
   );
 }

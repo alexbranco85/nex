@@ -23,7 +23,8 @@ const CustomTextField = <T extends FieldValues>(props: CustomTextFieldProps<T>) 
     autoComplete,
     label,
     size,
-    onKeyDown
+    onKeyDown,
+    type
   } = props;
 
   return (
@@ -36,13 +37,14 @@ const CustomTextField = <T extends FieldValues>(props: CustomTextFieldProps<T>) 
           <TextField
             onChange={field.onChange}
             value={field.value}
-            size={size ?? "small"}
+            size={size ?? "medium"}
             autoComplete={autoComplete ?? "off"}
             label={required ? `* ${label}` : label}
             error={!!error?.[name]}
             required={false}
             onKeyDown={(e) => onKeyDown ? onKeyDown(e) : (e.keyCode === 13 && e.preventDefault())}
             fullWidth
+            type={type}
           />
         )}
       />

@@ -32,6 +32,30 @@ class TransactionModel {
     }
     return await query;
   }
+
+  static async getTotalPoints(cpf) {
+    return await db('transaction')
+      .where({ cpf, status: 3 })
+      .sum('points as totalPoints')
+      .first();
+  }
+
+  static async saveTransactionsFile(transactions) {
+    await db('transaction').insert(transactions);
+  }
+
+  static parseStatus(status) {
+    switch (status.toLowerCase()) {
+      case 'em avaliação':
+        return 1;
+      case 'reprovado':
+        return 2;
+      case 'aprovado':
+        return 3;
+      default:
+        throw new Error('Invalid status value');
+    }
+  };
 }
 
 module.exports = TransactionModel;

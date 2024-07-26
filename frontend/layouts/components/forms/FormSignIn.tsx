@@ -2,6 +2,8 @@
 import { Box, Button, Grid, Link, Typography } from "@mui/material";
 import CustomTextField from "../fields/CustomTextField";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { signIn, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 type FormValues = {
   email: string
@@ -10,8 +12,20 @@ type FormValues = {
 
 export default function FormSignIn() {
 
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
-    console.log(data);
+  const router = useRouter();
+
+  const onSubmit: SubmitHandler<FormValues> = async (data) => {
+    const result = await signIn('credentials', { ...data, redirect: false });
+
+    if (result && result.error == 'CredentialsSignin') {
+      console.log('Usuário ou senha incorretos.');
+      return;
+    } else if (result && result.error) {
+      console.log(result.error);
+      return;
+    }
+
+    router.replace('/home');
   };
 
   const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -60,6 +74,7 @@ export default function FormSignIn() {
               required
               label="Senha"
               control={control}
+              type="password"
             />
           </Grid>
         </Grid>
@@ -73,7 +88,7 @@ export default function FormSignIn() {
         </Button>
         <Grid container>
           <Grid item>
-            <Link href="#" variant="body2">
+            <Link href="/sign-up" variant="body2">
               {"Ainda não tem uma conta? Cadastre-se"}
             </Link>
           </Grid>
